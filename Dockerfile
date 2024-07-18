@@ -1,4 +1,5 @@
-FROM cockroachdb/cockroach:v21.1.11
+ARG COCKROACH_VERSION=latest-v24.1
+FROM cockroachdb/cockroach:${COCKROACH_VERSION}
 
 ENV COCKROACH_HTTP_ADDR ""
 ENV COCKROACH_ADVERTISE_ADDR ""
@@ -14,6 +15,7 @@ ENV COCKROACH_DATA_DIR "/cockroach/cockroach-data"
 
 ADD assets/ /
 
+RUN chmod +x /docker-entrypoint.sh
 RUN mkdir -p /docker-entrypoint-initdb.d /cockroach/cockroach-data
 
 VOLUME /cockroach/cockroach-certs

@@ -95,11 +95,11 @@ function createUser() {
     if [ -z "${COCKROACH_PASSWORD}" ]; then
       echo
       echo "Creating user ${COCKROACH_USER} without password..."
-      echo "create user ${COCKROACH_USER};" | /cockroach/cockroach sql ${COCKROACH_SECURITY_OPTS} --database defaultdb --user root
+      echo "create user if not exists ${COCKROACH_USER};" | /cockroach/cockroach sql ${COCKROACH_SECURITY_OPTS} --database defaultdb --user root
     else
       echo
       echo "Creating user ${COCKROACH_USER} with password..."
-      echo "create user ${COCKROACH_USER} with password '${COCKROACH_PASSWORD}';" | /cockroach/cockroach sql ${COCKROACH_SECURITY_OPTS} --database defaultdb --user root
+      echo "create user if not exists ${COCKROACH_USER} with password '${COCKROACH_PASSWORD}';" | /cockroach/cockroach sql ${COCKROACH_SECURITY_OPTS} --database defaultdb --user root
     fi
     echo "grant admin to ${COCKROACH_USER};" | /cockroach/cockroach sql ${COCKROACH_SECURITY_OPTS} --database defaultdb --user root
   fi
